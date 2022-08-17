@@ -1,5 +1,8 @@
+mod my;
+
 use core::fmt;
 use std::mem;
+
 use crate::List::*;
 
 fn main() {
@@ -7,6 +10,7 @@ fn main() {
     sta_out();
     learn_arr_and_slice();
     var_bindings();
+    test_mod();
 }
 
 // struct Unprintable(i32);
@@ -218,3 +222,19 @@ fn var_bindings () {
 }
 
 // https://doc.rust-lang.org/stable/rust-by-example/types/cast.html
+
+fn test_mod () {
+    my_mod::function();
+    my::my::hello();
+}
+
+mod my_mod {
+    fn private_function () {
+        println!("call my_mod:private_function")
+    }
+
+    pub fn function () {
+        println!("call my_mod:function");
+        private_function();
+    }
+}
